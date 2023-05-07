@@ -1,9 +1,9 @@
 [
 	{
-		"ip": "144.126.241.37:6969",
+		"ip": "204.10.192.215:7777",
 		"client": "1020276525301501952",
-		"discord": "Y6w4kXzuPX",
-		"slot": 500,
+		"discord": "Mes2z9DQcu",
+		"slot": 1000,
 		"masked": "Stranger"
 	},
 	{
@@ -26,13 +26,6 @@
 		"discord": "UuGHpkQpxn",
 		"slot": 100,
 		"masked": "Sta12"
-	},
-	{
-		"ip": "154.6.205.30:7777",
-		"client": "1083687204083204208",
-		"discord": "Gp3PEw2WZn",
-		"slot": 100,
-		"masked": "Mask_"
 	},
 	{
 		"ip": "217.182.36.95:7777",
