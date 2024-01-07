@@ -26,5 +26,12 @@
 		"discord": "TdNG2XbtsX",
 		"slot": 100,
 		"masked": "Stranger"
+	},
+	{
+		"ip": "157.254.166.0:30001",
+		"client": "1083378101628702732",
+		"discord": "BJsXVTThcp",
+		"slot": 50,
+		"masked": "Stranger"
 	}
 ]
