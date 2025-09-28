@@ -1,11 +1,13 @@
 {
   "undergraduate": {
     "Spring-2025": "/academic-calendar-details/spring-undergraduate-2025",
-    "Summer-2025": "/academic-calendar-details/summer-2025-undergraduate-programs"
+    "Summer-2025": "/academic-calendar-details/summer-2025-undergraduate-programs",
+    "Fall-2025": "/academic-calendar-details/fall-2025-undergraduate"
   },
   "graduate": {
     "Spring-2025": "/academic-calendar-details/spring-graduate-2025",
-    "Summer-2025": "/academic-calendar-details/summer-2025-graduate"
+    "Summer-2025": "/academic-calendar-details/summer-2025-graduate",
+    "Fall-2025": "/academic-calendar-details/fall-2025"
   },
   "pharmacy_law": {
     "B-Spring-2025": "/academic-calendar-details/b-pharm-llb-spring-2025",
