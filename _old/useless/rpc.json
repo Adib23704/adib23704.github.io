@@ -1,17 +1,10 @@
 [
 	{
-		"ip": "178.128.58.84:7777",
-		"client": "1061655937074606120",
-		"discord": "x5X4YtUEMD",
-		"slot": 500,
-		"masked": "Stranger"
-	},
-	{
 		"ip": "213.32.6.232:7777",
 		"client": "1070245823587307590",
 		"discord": "yMwuy7H",
 		"slot": 500,
-		"masked": "Pablo_Escobor"
+		"masked": "Stra12"
 	},
 	{
 		"ip": "217.182.36.95:7777",
@@ -19,12 +12,5 @@
 		"discord": "QCNMdQ2",
 		"slot": 500,
 		"masked": "Stra12"
-	},
-	{
-		"ip": "159.65.136.106:30000",
-		"client": "1083378101628702732",
-		"discord": "nlrpbd",
-		"slot": 100,
-		"masked": "Stranger"
 	}
 ]
