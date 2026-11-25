@@ -13,11 +13,8 @@
     [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
     Add-Type -AssemblyName System.IO.Compression.FileSystem
 
-    # --- Configuration ---
     $VencordRepo  = 'Vendicated/Vencord'
     $PluginRepo   = 'Adib23704/completeDiscordQuest-Vencord'
-    # Pinned commit SHA prevents unreviewed upstream pushes from running in Discord.
-    # Update this SHA when releasing a new version of completeDiscordQuest-Vencord.
     $PluginCommit = '792b8b3350d830c0c778d94da3641e169960dfa6'
 
     $InstallDir = Join-Path $env:LOCALAPPDATA 'VencordQuest'
@@ -210,7 +207,6 @@
         New-Item -ItemType Directory -Path $TempDir -Force | Out-Null
         $arch = Get-Arch
 
-        # 1. Fetch Vencord source zip (no git required)
         Write-Step '1/6' 'Downloading Vencord source...'
         $vencordZip = Join-Path $TempDir 'vencord.zip'
         if (Test-Path -LiteralPath $StageDir) {
@@ -223,7 +219,6 @@
             throw 'Downloaded Vencord archive is invalid (missing package.json).'
         }
 
-        # Resolve Vencord commit SHA so common.mjs skips `git rev-parse` & `git remote`
         $vencordHash = 'custom'
         try {
             $commitInfo = Invoke-RestMethod -Uri "https://api.github.com/repos/$VencordRepo/commits/main" -UseBasicParsing -Headers @{
@@ -239,7 +234,6 @@
         $env:VENCORD_REMOTE = $VencordRepo
         Write-Ok "Vencord source ready (ref: $vencordHash)."
 
-        # 2. Fetch pinned completeDiscordQuest plugin zip
         Write-Step '2/6' "Downloading completeDiscordQuest plugin ($($PluginCommit.Substring(0, 7)))..."
         $pluginZip = Join-Path $TempDir 'plugin.zip'
         $pluginExtract = Join-Path $TempDir 'plugin-extract'
@@ -256,7 +250,6 @@
         Copy-Item -LiteralPath $pluginRoot.FullName -Destination $pluginDest -Recurse -Force
         Write-Ok 'Plugin staged into src/userplugins/completeDiscordQuest.'
 
-        # 3. Ensure portable Node.js >=22 and matching pnpm
         Write-Step '3/6' 'Checking Node.js (>=22) and pnpm...'
         $pkgJson = Get-Content -LiteralPath (Join-Path $vencordRoot.FullName 'package.json') -Raw | ConvertFrom-Json
         $pnpmVersion = '12.15.0'
@@ -266,7 +259,6 @@
         Ensure-Node22 -Arch $arch -WorkDir $TempDir
         $pnpmExe = Ensure-Pnpm -RequiredVersion $pnpmVersion -Arch $arch -WorkDir $TempDir
 
-        # 4. Prepare final install directory (outside OneDrive/Documents, preserving other userplugins)
         Write-Step '4/6' "Preparing $InstallDir..."
         if (Test-Path -LiteralPath $InstallDir) {
             Stop-DiscordIfRunning
@@ -283,7 +275,6 @@
         Move-Item -LiteralPath $vencordRoot.FullName -Destination $InstallDir -Force
         Write-Ok 'Source files placed.'
 
-        # 5. Install dependencies & build Vencord
         Write-Step '5/6' 'Installing dependencies and building Vencord (this may take 1-2 minutes)...'
         Push-Location -LiteralPath $InstallDir
         try {
@@ -293,7 +284,6 @@
             Invoke-Logged -Exe $pnpmExe -CmdArgs @('build')
             Write-Ok 'Vencord built.'
 
-            # 6. Inject Vencord interactively
             Write-Step '6/6' 'Injecting Vencord - follow the installer prompts below:'
             Stop-DiscordIfRunning
             Write-Host '------------------------------------------------------------' -ForegroundColor DarkGray
